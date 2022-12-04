@@ -1,0 +1,107 @@
+cabal-version: 3.0
+name:          markright
+version:       0
+synopsis:      Subset of markdown focused on text
+homepage:      https://github.com/nikita-volkov/markright
+bug-reports:   https://github.com/nikita-volkov/markright/issues
+author:        Nikita Volkov <nikita.y.volkov@mail.ru>
+maintainer:    Nikita Volkov <nikita.y.volkov@mail.ru>
+copyright:     (c) 2022 Nikita Volkov
+license:       MIT
+license-file:  LICENSE
+
+source-repository head
+  type:     git
+  location: git://github.com/nikita-volkov/markright.git
+
+common base
+  default-language:   Haskell2010
+  default-extensions:
+    NoImplicitPrelude
+    NoMonomorphismRestriction
+    ApplicativeDo
+    Arrows
+    BangPatterns
+    BinaryLiterals
+    BlockArguments
+    ConstraintKinds
+    DataKinds
+    DefaultSignatures
+    DeriveDataTypeable
+    DeriveFoldable
+    DeriveFunctor
+    DeriveGeneric
+    DeriveLift
+    DeriveTraversable
+    DerivingVia
+    DuplicateRecordFields
+    EmptyCase
+    EmptyDataDecls
+    FlexibleContexts
+    FlexibleInstances
+    FunctionalDependencies
+    GADTs
+    GeneralizedNewtypeDeriving
+    HexFloatLiterals
+    ImportQualifiedPost
+    ImportQualifiedPost
+    LambdaCase
+    LiberalTypeSynonyms
+    MultiParamTypeClasses
+    MultiWayIf
+    NumericUnderscores
+    OverloadedLabels
+    OverloadedStrings
+    ParallelListComp
+    PatternGuards
+    PatternSynonyms
+    QuasiQuotes
+    RankNTypes
+    RecordWildCards
+    ScopedTypeVariables
+    StandaloneDeriving
+    StrictData
+    TemplateHaskell
+    TupleSections
+    TypeApplications
+    TypeFamilies
+    TypeOperators
+    UndecidableInstances
+    ViewPatterns
+    NoFieldSelectors
+    OverloadedRecordDot
+
+library
+  import:          base
+  hs-source-dirs:  libs/main
+  exposed-modules: Markright
+  other-modules:
+    Markright.Ast
+    Markright.Builder
+    Markright.Prelude
+    Markright.QuasiQuoterHelpers
+
+  build-depends:
+    , acc
+    , attoparsec
+    , attoparsec-data
+    , base
+    , bytestring
+    , template-haskell
+    , text
+    , transformers
+    , vector
+
+test-suite tasty
+  import:         base
+  type:           exitcode-stdio-1.0
+  hs-source-dirs: tests/tasty
+  main-is:        Main.hs
+  build-depends:
+    , markright
+    , QuickCheck            >=2.8.1  && <3
+    , quickcheck-instances  ^>=0.3.11
+    , rerebase              <2
+    , tasty                 >=0.12   && <2
+    , tasty-hunit           >=0.9    && <0.11
+    , tasty-quickcheck      >=0.9    && <0.11
